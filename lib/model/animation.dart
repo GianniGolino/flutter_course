@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/tasks_page.dart';
-import 'package:flutter_animations/page2.dart';
+import 'package:flutter_animations/pages/tasks_page.dart';
+import 'package:flutter_animations/pages/page2.dart';
 
 Route bottomToTopSlide() {
   return PageRouteBuilder(

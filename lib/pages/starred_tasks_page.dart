@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/task_item.dart';
+import 'package:flutter_animations/model/task_item.dart';
 
 class StarredTasksPage extends StatefulWidget {
   const StarredTasksPage({super.key, required this.starredTasks});
