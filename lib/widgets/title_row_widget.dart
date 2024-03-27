@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class TitleRowWidget extends StatelessWidget {
@@ -7,12 +8,15 @@ class TitleRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        Padding(
-          padding: EdgeInsets.only(left: 12.0),
-          child: Text(
-            'To do:',
-            style: TextStyle(
-              fontSize: 26,
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(left: 12.0),
+            child: AutoSizeText(
+              maxLines: 2,
+              'To do',
+              style: TextStyle(
+                fontSize: 26,
+              ),
             ),
           ),
         ),

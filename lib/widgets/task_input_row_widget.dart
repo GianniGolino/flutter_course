@@ -23,7 +23,6 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
-      //potentially create a separate widget
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

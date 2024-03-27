@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/pages/starred_tasks_page.dart';
 import 'package:flutter_animations/model/task_item.dart';
-import 'package:flutter_animations/widgets/bottomnavigationbar_widget.dart';
+import 'package:flutter_animations/widgets/bottom_navigationbar_widget.dart';
 import 'package:flutter_animations/widgets/header_widget.dart';
 import 'package:flutter_animations/widgets/listview_widget.dart';
-import 'package:flutter_animations/widgets/taskinputrow_widget.dart';
-import 'package:flutter_animations/widgets/titlerow_widget.dart';
+import 'package:flutter_animations/widgets/task_input_row_widget.dart';
+import 'package:flutter_animations/widgets/title_row_widget.dart';
 
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
@@ -30,7 +30,7 @@ class _TasksPageState extends State<TasksPage> {
       },
       child: Scaffold(
           appBar: AppBar(
-            automaticallyImplyLeading: false,
+            //automaticallyImplyLeading: false,
             elevation: 2.0,
             title: const Text('To do app'),
           ),
