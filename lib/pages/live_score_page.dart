@@ -11,6 +11,9 @@ class LiveScorePage extends StatefulWidget {
 }
 
 class _LiveScorePageState extends State<LiveScorePage> {
+  int homeTeamScore = 0;
+  int awayTeamScore = 0;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,14 +26,28 @@ class _LiveScorePageState extends State<LiveScorePage> {
           //backgroundColor: Colors.greenAccent,
           title: const Text('Live Score'),
         ),
-        body: const Center(
+        body: Center(
           child: Column(
             children: [
-              Gap(32),
-              LiveScoreBoardWidget(),
-              Spacer(),
-              UpdateScoreWidget(),
-              Gap(32),
+              const Gap(32),
+              LiveScoreBoardWidget(
+                homeTeamScore: homeTeamScore,
+                awayTeamScore: awayTeamScore,
+              ),
+              const Spacer(),
+              UpdateScoreWidget(
+                onHomeTeamScoreChanged: (p0) {
+                  setState(() {
+                    homeTeamScore += p0;
+                  });
+                },
+                onAwayTeamScoreChanged: (p0) {
+                  setState(() {
+                    awayTeamScore += p0;
+                  });
+                },
+              ),
+              const Gap(32),
             ],
           ),
         ),

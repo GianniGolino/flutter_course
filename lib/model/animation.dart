@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/pages/tasks_page.dart';
-import 'package:flutter_animations/pages/page2.dart';
+import 'package:flutter_animations/pages/empty_back_page.dart';
 
 Route bottomToTopSlide() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const EmptyBackPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return SlideTransition(
         position: animation.drive(
@@ -18,7 +19,8 @@ Route bottomToTopSlide() {
 
 Route topToBottomSlide() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const EmptyBackPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return SlideTransition(
         position: animation.drive(
@@ -32,7 +34,8 @@ Route topToBottomSlide() {
 
 Route leftToRightSlide() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const EmptyBackPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(-1.0, 0.0);
       const end = Offset.zero;
@@ -48,7 +51,8 @@ Route leftToRightSlide() {
 
 Route rightToLeftSlide() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const EmptyBackPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
@@ -64,7 +68,8 @@ Route rightToLeftSlide() {
 
 Route fadeTransition() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const EmptyBackPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return FadeTransition(
         opacity: animation.drive(Tween(begin: 0.0, end: 1.0)),
@@ -77,7 +82,8 @@ Route fadeTransition() {
 Route scaleTransition() {
   return PageRouteBuilder(
     transitionDuration: const Duration(milliseconds: 200),
-    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const EmptyBackPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return ScaleTransition(
         scale: animation.drive(Tween(begin: 0.0, end: 1.0)),

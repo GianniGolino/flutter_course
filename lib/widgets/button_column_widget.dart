@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/model/animation.dart';
+import 'package:flutter_animations/pages/animation_examples_page.dart';
 import 'package:flutter_animations/pages/live_score_page.dart';
 import 'package:gap/gap.dart';
 
@@ -16,62 +17,15 @@ class ButtonColumnWidget extends StatelessWidget {
             width: 250,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(bottomToTopSlide());
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const AnimationExamplesPage()),
+                );
               },
-              child: const Text('Bottom to top slide'),
+              child: const Text('Transition Animations'),
             ),
           ),
           const Gap(16),
-          SizedBox(
-            width: 250,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(topToBottomSlide());
-              },
-              child: const Text('Top to bottom slide'),
-            ),
-          ),
-          const Gap(16),
-          SizedBox(
-            width: 250,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(leftToRightSlide());
-              },
-              child: const Text('Left to right slide'),
-            ),
-          ),
-          const Gap(16),
-          SizedBox(
-            width: 250,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(rightToLeftSlide());
-              },
-              child: const Text('Right to left slide'),
-            ),
-          ),
-          const Gap(16),
-          SizedBox(
-            width: 250,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(fadeTransition());
-              },
-              child: const Text('Fade transition'),
-            ),
-          ),
-          const Gap(16),
-          SizedBox(
-            width: 250,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(scaleTransition());
-              },
-              child: const Text('Scale transition'),
-            ),
-          ),
-          const Gap(16.0),
           SizedBox(
             width: 250,
             child: ElevatedButton(

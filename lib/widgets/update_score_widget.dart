@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 
 class UpdateScoreWidget extends StatefulWidget {
-  const UpdateScoreWidget({super.key});
+  const UpdateScoreWidget(
+      {super.key,
+      required this.onHomeTeamScoreChanged,
+      required this.onAwayTeamScoreChanged});
+  final void Function(int) onHomeTeamScoreChanged;
+  final void Function(int) onAwayTeamScoreChanged;
 
   @override
   State<UpdateScoreWidget> createState() => _UpdateScoreWidgetState();
@@ -36,9 +40,14 @@ class _UpdateScoreWidgetState extends State<UpdateScoreWidget> {
                           FilteringTextInputFormatter.allow(RegExp(r'^[0-9]$')),
                         ],
                         controller: homeTeamTextController,
+                        cursorHeight: 20,
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 4),
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
                           //hintText: '0', // Set default text to '0'
                         ),
                         style: const TextStyle(fontSize: 30),
@@ -54,7 +63,12 @@ class _UpdateScoreWidgetState extends State<UpdateScoreWidget> {
                           width: 44,
                           height: 44,
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              int intValue =
+                                  int.parse(homeTeamTextController.text);
+                              widget.onHomeTeamScoreChanged(intValue);
+                              homeTeamTextController.clear();
+                            },
                             child: const Icon(Icons.arrow_upward),
                           ),
                         ),
@@ -63,7 +77,12 @@ class _UpdateScoreWidgetState extends State<UpdateScoreWidget> {
                           width: 44,
                           height: 44,
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              int intValue =
+                                  int.parse(homeTeamTextController.text);
+                              widget.onHomeTeamScoreChanged(-intValue);
+                              homeTeamTextController.clear();
+                            },
                             child: const Icon(Icons.arrow_downward),
                           ),
                         ),
@@ -86,9 +105,14 @@ class _UpdateScoreWidgetState extends State<UpdateScoreWidget> {
                           FilteringTextInputFormatter.allow(RegExp(r'^[0-9]$')),
                         ],
                         controller: awayTeamTextController,
+                        cursorHeight: 20,
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 4),
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
                           //hintText: '0', // Set default text to '0'
                         ),
                         style: const TextStyle(fontSize: 30),
@@ -104,7 +128,12 @@ class _UpdateScoreWidgetState extends State<UpdateScoreWidget> {
                           width: 44,
                           height: 44,
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              int intValue =
+                                  int.parse(awayTeamTextController.text);
+                              widget.onAwayTeamScoreChanged(intValue);
+                              awayTeamTextController.clear();
+                            },
                             child: const Icon(Icons.arrow_upward),
                           ),
                         ),
@@ -113,7 +142,12 @@ class _UpdateScoreWidgetState extends State<UpdateScoreWidget> {
                           width: 44,
                           height: 44,
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              int intValue =
+                                  int.parse(awayTeamTextController.text);
+                              widget.onAwayTeamScoreChanged(-intValue);
+                              awayTeamTextController.clear();
+                            },
                             child: const Icon(Icons.arrow_downward),
                           ),
                         ),
