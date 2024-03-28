@@ -33,6 +33,7 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
               controller: widget.textController,
               //adding tasks through the keyboard
               onSubmitted: (value) {
+                // TODO: Essendo [widget.tasks] una variabile proveniente dal parent, non porterebbe nessun risultato modificarla solo nel child. Attualmente il parent è ignaro della modifica
                 if (value.isNotEmpty) {
                   setState(() {
                     widget.tasks.add(TaskItem(widget.textController.text, false,
@@ -63,6 +64,7 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
                 borderRadius: BorderRadius.circular(15),
               ))),
               onPressed: () {
+                // TODO: Essendo [widget.tasks] una variabile proveniente dal parent, non porterebbe nessun risultato modificarla solo nel child. Attualmente il parent è ignaro della modifica
                 setState(() {
                   if (widget.textController.text.isNotEmpty) {
                     widget.tasks.add(TaskItem(widget.textController.text, false,

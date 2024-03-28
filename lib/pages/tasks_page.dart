@@ -7,6 +7,10 @@ import 'package:flutter_animations/widgets/listview_widget.dart';
 import 'package:flutter_animations/widgets/task_input_row_widget.dart';
 import 'package:flutter_animations/widgets/title_row_widget.dart';
 
+
+// TODO: apporta una modifica al nome del widget per essere coerente con quello visualizzato nel titolo dell'appBar: 
+// TODO: attualmente il titolo dell'appBar è "To do app" mentre il widget si chiama TaskPage
+
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
 

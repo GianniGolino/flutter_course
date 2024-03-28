@@ -6,14 +6,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           elevation: 2,
           title: const Text('Animations'),
         ),
         body: const ButtonColumnWidget(),
-      ),
     );
   }
 }
