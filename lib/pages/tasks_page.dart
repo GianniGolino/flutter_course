@@ -79,9 +79,19 @@ class _TasksPageState extends State<TasksPage> {
       child: Column(
         children: [
           TaskInputRowWidget(
-              tasks: tasks,
-              tasksIDIndex: tasksIDIndex,
+              onTaskAdded: (taskName) {
+                setState(() {
+                  tasks.add(
+                    TaskItem(taskName, false, tasksIDIndex, false),
+                  );
+                  tasksIDIndex++;
+                });
+              },
               textController: textController),
+          // TaskInputRowWidget(
+          //     tasks: tasks,
+          //     tasksIDIndex: tasksIDIndex,
+          //     textController: textController),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
           ),

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/model/task_item.dart';
+//import 'package:flutter_animations/model/task_item.dart';
 
 class TaskInputRowWidget extends StatefulWidget {
   const TaskInputRowWidget(
       {super.key,
-      required this.tasks,
-      required this.tasksIDIndex,
+      // required this.tasks,
+      // required this.tasksIDIndex,
+      required this.onTaskAdded,
       required this.textController});
 
-  final List<TaskItem> tasks;
-  final int tasksIDIndex;
+  //final List<TaskItem> tasks;
+  //final int tasksIDIndex;
+  final void Function(String) onTaskAdded;
   final TextEditingController textController;
 
   @override
@@ -17,7 +19,7 @@ class TaskInputRowWidget extends StatefulWidget {
 }
 
 class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
-  int _localTasksIDIndex = 0;
+  //int _localTasksIDIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +37,12 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
               onSubmitted: (value) {
                 // TODO: Essendo [widget.tasks] una variabile proveniente dal parent, non porterebbe nessun risultato modificarla solo nel child. Attualmente il parent è ignaro della modifica
                 if (value.isNotEmpty) {
-                  setState(() {
-                    widget.tasks.add(TaskItem(widget.textController.text, false,
-                        _localTasksIDIndex, false));
-                    _localTasksIDIndex++;
-                    widget.textController.clear();
-                    widget.textController.text = "";
-                  });
+                  widget.onTaskAdded(value);
+                  // widget.tasks.add(TaskItem(widget.textController.text, false,
+                  //     _localTasksIDIndex, false));
+                  // _localTasksIDIndex++;
+                  widget.textController.clear();
+                  // widget.textController.text = "";
                 }
               },
               textInputAction: TextInputAction.done,
@@ -64,19 +65,23 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
                 borderRadius: BorderRadius.circular(15),
               ))),
               onPressed: () {
-                // TODO: Essendo [widget.tasks] una variabile proveniente dal parent, non porterebbe nessun risultato modificarla solo nel child. Attualmente il parent è ignaro della modifica
-                setState(() {
-                  if (widget.textController.text.isNotEmpty) {
-                    widget.tasks.add(TaskItem(widget.textController.text, false,
-                        _localTasksIDIndex, false));
-                    _localTasksIDIndex++;
-                    //isStarred.add(false);
-                    widget.textController.clear();
-                    widget.textController.text = "";
+                if (widget.textController.text.isNotEmpty) {
+                  widget.onTaskAdded(widget.textController.text);
+                  widget.textController.clear();
+                }
 
-                    FocusScope.of(context).unfocus();
-                  }
-                });
+                // setState(() {
+                //   if (widget.textController.text.isNotEmpty) {
+                //     widget.tasks.add(TaskItem(widget.textController.text, false,
+                //         _localTasksIDIndex, false));
+                //     _localTasksIDIndex++;
+                //     //isStarred.add(false);
+                //     widget.textController.clear();
+                //     widget.textController.text = "";
+
+                //     FocusScope.of(context).unfocus();
+                //   }
+                // });
               },
               child: const Icon(Icons.play_arrow),
             ),

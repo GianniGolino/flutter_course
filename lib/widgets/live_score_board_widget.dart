@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class LiveScoreBoardWidget extends StatefulWidget {
+class LiveScoreBoardWidget extends StatelessWidget {
   const LiveScoreBoardWidget(
       {super.key, required this.homeTeamScore, required this.awayTeamScore});
   final int homeTeamScore;
   final int awayTeamScore;
 
-  @override
-  State<LiveScoreBoardWidget> createState() => _LiveScoreBoardWidgetState();
-}
-
-class _LiveScoreBoardWidgetState extends State<LiveScoreBoardWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,7 +26,7 @@ class _LiveScoreBoardWidgetState extends State<LiveScoreBoardWidget> {
         ),
         const Gap(32),
         Text(
-          '${widget.homeTeamScore}',
+          '$homeTeamScore',
           style: const TextStyle(fontSize: 24),
         ),
         const Gap(16),
@@ -41,7 +36,7 @@ class _LiveScoreBoardWidgetState extends State<LiveScoreBoardWidget> {
         ),
         const Gap(16),
         Text(
-          '${widget.awayTeamScore}',
+          '$awayTeamScore',
           style: const TextStyle(fontSize: 24),
         ),
         const Gap(32),
