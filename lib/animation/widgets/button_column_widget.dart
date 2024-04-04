@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/model/animation.dart';
-import 'package:flutter_animations/pages/animation_examples_page.dart';
-import 'package:flutter_animations/pages/live_score_page.dart';
+import 'package:flutter_animations/animation/models/animation.dart';
+import 'package:flutter_animations/animation/pages/animation_examples_page.dart';
+import 'package:flutter_animations/live_score/pages/live_score_page.dart';
 import 'package:gap/gap.dart';
 
 class ButtonColumnWidget extends StatelessWidget {
@@ -34,7 +34,7 @@ class ButtonColumnWidget extends StatelessWidget {
                   toChapter8(),
                 );
               },
-              child: const Text('Task Manager'),
+              child: const Text('To do App'),
             ),
           ),
           const Gap(16),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/model/task_item.dart';
+import 'package:flutter_animations/todo_app/models/task_item.dart';
 
 class ListViewWidget extends StatefulWidget {
   const ListViewWidget(
@@ -31,15 +31,15 @@ class _ListViewWidgetState extends State<ListViewWidget> {
       itemBuilder: (context, index) {
         return Row(
           children: [
-            Expanded(
-              flex: 1,
-              child: Text(
-                widget.tasks[index].id.toString(),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4),
-            ),
+            // Expanded(
+            //   flex: 1,
+            //   child: Text(
+            //     widget.tasks[index].id.toString(),
+            //   ),
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 4),
+            // ),
             Expanded(
               flex: 5,
               child: !widget.tasks[index].isEditing

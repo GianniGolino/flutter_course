@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:flutter_animations/model/animation.dart';
+import 'package:flutter_animations/animation/models/animation.dart';
 
 class AnimationExamplesPage extends StatelessWidget {
   const AnimationExamplesPage({super.key});

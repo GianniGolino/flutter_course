@@ -14,16 +14,17 @@ class HeaderWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
           children: [
-            Expanded(
-              child: Text(
-                'ID',
-              ),
-            ),
-            VerticalDivider(
-              color: Colors.grey,
-              thickness: 1,
-            ),
+            // Expanded(
+            //   child: Text(
+            //     'ID',
+            //   ),
+            // ),
+            // VerticalDivider(
+            //   color: Colors.grey,
+            //   thickness: 1,
+            // ),
             Expanded(
               flex: 7,
               child: Text('Title'),

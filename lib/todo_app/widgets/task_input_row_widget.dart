@@ -35,7 +35,6 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
               controller: widget.textController,
               //adding tasks through the keyboard
               onSubmitted: (value) {
-                // TODO: Essendo [widget.tasks] una variabile proveniente dal parent, non porterebbe nessun risultato modificarla solo nel child. Attualmente il parent è ignaro della modifica
                 if (value.isNotEmpty) {
                   widget.onTaskAdded(value);
                   // widget.tasks.add(TaskItem(widget.textController.text, false,

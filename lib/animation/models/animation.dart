@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/pages/tasks_page.dart';
-import 'package:flutter_animations/pages/empty_back_page.dart';
+import 'package:flutter_animations/todo_app/pages/todo_app_page.dart';
+import 'package:flutter_animations/animation/pages/empty_back_page.dart';
 
 Route bottomToTopSlide() {
   return PageRouteBuilder(
@@ -96,7 +96,8 @@ Route scaleTransition() {
 Route toChapter8() {
   return PageRouteBuilder(
     transitionDuration: const Duration(milliseconds: 200),
-    pageBuilder: (context, animation, secondaryAnimation) => const TasksPage(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const ToDoAppPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return ScaleTransition(
         scale: animation.drive(Tween(begin: 0.0, end: 1.0)),

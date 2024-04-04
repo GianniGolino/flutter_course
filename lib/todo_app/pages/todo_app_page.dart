@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/pages/starred_tasks_page.dart';
-import 'package:flutter_animations/model/task_item.dart';
-import 'package:flutter_animations/widgets/bottom_navigationbar_widget.dart';
-import 'package:flutter_animations/widgets/header_widget.dart';
-import 'package:flutter_animations/widgets/listview_widget.dart';
-import 'package:flutter_animations/widgets/task_input_row_widget.dart';
-import 'package:flutter_animations/widgets/title_row_widget.dart';
+import 'package:flutter_animations/todo_app/pages/starred_tasks_page.dart';
+import 'package:flutter_animations/todo_app/models/task_item.dart';
+import 'package:flutter_animations/todo_app/widgets/bottom_navigationbar_widget.dart';
+import 'package:flutter_animations/todo_app/widgets/header_widget.dart';
+import 'package:flutter_animations/todo_app/widgets/listview_widget.dart';
+import 'package:flutter_animations/todo_app/widgets/task_input_row_widget.dart';
+import 'package:flutter_animations/todo_app/widgets/title_row_widget.dart';
 
-
-// TODO: apporta una modifica al nome del widget per essere coerente con quello visualizzato nel titolo dell'appBar: 
-// TODO: attualmente il titolo dell'appBar è "To do app" mentre il widget si chiama TaskPage
-
-class TasksPage extends StatefulWidget {
-  const TasksPage({super.key});
+class ToDoAppPage extends StatefulWidget {
+  const ToDoAppPage({super.key});
 
   @override
-  State<TasksPage> createState() => _TasksPageState();
+  State<ToDoAppPage> createState() => _ToDoAppPageState();
 }
 
-class _TasksPageState extends State<TasksPage> {
+class _ToDoAppPageState extends State<ToDoAppPage> {
   final textController = TextEditingController();
   final editTextController = TextEditingController();
   final List<TaskItem> tasks = [];
