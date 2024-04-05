@@ -107,7 +107,6 @@ class _ToDoAppPageState extends State<ToDoAppPage> {
     );
   }
 
-  //to move to a different file?
   List<TaskItem> getStarredTasks() {
     return tasks.where((task) => task.isStarred).toList();
   }

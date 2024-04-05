@@ -28,6 +28,9 @@ class _LiveScorePageState extends State<LiveScorePage> {
   final Color _primaryColor = const Color.fromARGB(255, 8, 76, 93);
   final Color _secondaryColor = const Color.fromARGB(255, 254, 178, 36);
 
+  String highlight = '';
+  bool isAHomePlayer = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +55,22 @@ class _LiveScorePageState extends State<LiveScorePage> {
                     borderRadius: const BorderRadius.all(Radius.circular(15))),
                 child: Column(
                   children: [
-                    const TeamsAndTimeBarWidget(),
+                    TeamsAndTimeBarWidget(
+                      homeTeam: homeTeam,
+                      awayTeam: awayTeam,
+                      onEvent: (p0, p1) {
+                        setState(() {
+                          highlight = p0;
+                          isAHomePlayer = p1;
+                        });
+                      },
+                      // onEvent: (p0) {
+                      //   setState(() {
+                      //     highlight = p0;
+                      //     isAHomePlayer = p1
+                      //   });
+                      // },
+                    ),
                     const Gap(4),
                     ScoreBarWidget(
                       homeTeamScore: _homeTeamScore,
@@ -62,14 +80,18 @@ class _LiveScorePageState extends State<LiveScorePage> {
                 ),
               ),
               const Gap(4),
-              const HighlightsWidget(),
+              HighlightsWidget(
+                  highlight: highlight, isAHomePlayer: isAHomePlayer),
               const Gap(32),
-              const Expanded(
+              Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: PlayersListWidget(),
+                      child: PlayersListWidget(
+                        homeTeam: homeTeam,
+                        awayTeam: awayTeam,
+                      ),
                     ),
                     // ),
                   ],

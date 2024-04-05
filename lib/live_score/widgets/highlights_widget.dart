@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HighlightsWidget extends StatefulWidget {
-  const HighlightsWidget({super.key});
+  const HighlightsWidget(
+      {super.key, required this.highlight, required this.isAHomePlayer});
+
+  final String highlight;
+  final bool isAHomePlayer;
 
   @override
   State<HighlightsWidget> createState() => _HighlightsWidgetState();
@@ -12,7 +16,9 @@ class _HighlightsWidgetState extends State<HighlightsWidget> {
   final Color _secondaryColor = const Color.fromARGB(255, 254, 178, 36);
   @override
   Widget build(BuildContext context) {
+    print('${widget.highlight}, ${widget.isAHomePlayer}');
     return Container(
+      padding: const EdgeInsets.all(8),
       height: 144,
       decoration: BoxDecoration(
           border: Border.all(color: _secondaryColor),
@@ -32,12 +38,14 @@ class _HighlightsWidgetState extends State<HighlightsWidget> {
               ),
             ],
           ),
-          const Row(
+          Row(
+            mainAxisAlignment: widget.isAHomePlayer
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.end,
             children: [
-              //insert homeTeam highlights
-              Column(),
-              //insert awayTeam highlights
-              Column(),
+              Text(
+                widget.highlight,
+              ),
             ],
           ),
         ],
