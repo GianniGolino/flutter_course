@@ -5,14 +5,21 @@ class Player {
   bool isCautioned;
   bool isExpelled;
   bool hasScored;
+  bool ownGoal;
   int numberOfGoals;
+  int numberofOwnGoals;
+  List<String> events;
 
-  Player(
-      {required this.shirtNumber,
-      required this.playerName,
-      required this.isAHomeTeamPlayer,
-      required this.isCautioned,
-      required this.isExpelled,
-      required this.hasScored,
-      required this.numberOfGoals});
+  Player({
+    required this.shirtNumber,
+    required this.playerName,
+    required this.isAHomeTeamPlayer,
+    this.isCautioned = false,
+    this.isExpelled = false,
+    this.hasScored = false,
+    this.ownGoal = false,
+    this.numberOfGoals = 0,
+    this.numberofOwnGoals = 0,
+    required this.events,
+  });
 }

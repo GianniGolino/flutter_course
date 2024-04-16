@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/live_score/models/highlight.dart';
 import 'package:flutter_animations/live_score/models/player.dart';
 import 'package:flutter_animations/live_score/models/random_event.dart';
 import 'package:flutter_animations/live_score/models/team/team.dart';
@@ -8,16 +9,19 @@ import 'package:gap/gap.dart';
 import 'dart:async';
 
 class TeamsAndTimeBarWidget extends StatefulWidget {
-  const TeamsAndTimeBarWidget(
-      {super.key,
-      required this.homeTeam,
-      required this.awayTeam,
-      required this.onEvent});
+  const TeamsAndTimeBarWidget({
+    super.key,
+    required this.homeTeam,
+    required this.awayTeam,
+    required this.onEvent,
+    required this.onMatchStart,
+  });
 
   final Team homeTeam;
   final Team awayTeam;
 
-  final void Function(String, bool) onEvent;
+  final void Function(Highlight) onEvent;
+  final void Function() onMatchStart;
 
   @override
   State<TeamsAndTimeBarWidget> createState() => _TeamsAndTimeBarWidgetState();
@@ -27,23 +31,7 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
   Timer? _timer;
   Duration duration = const Duration(seconds: 1);
   String _matchTimer = "0";
-  final List<int> timeInterval = [
-    2,
-    4,
-    6,
-    8,
-    10,
-    12,
-    14,
-    15,
-    16,
-    20,
-    22,
-    25,
-    26,
-    30,
-    40
-  ];
+  final List<int> timeInterval = [];
 
   //final Color _primaryColor = const Color.fromARGB(255, 8, 76, 93);
   final Color _secondaryColor = const Color.fromARGB(255, 254, 178, 36);
@@ -86,8 +74,13 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
           style: TextStyle(fontSize: 22, color: _secondaryColor),
         ),
         IconButton(
+          splashColor: Colors.amberAccent,
           onPressed: () {
-            startTimer();
+            if (_timer == null) {
+              widget.onMatchStart();
+              generateHighlightMoments();
+              startTimer();
+            }
           },
           icon: Icon(Icons.play_arrow, color: _secondaryColor),
         ),
@@ -103,7 +96,7 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
   }
 
   void handleMatchTimer(Timer timer) {
-    if (timer.tick < 45) {
+    if (timer.tick < 21) {
       setState(() {
         _matchTimer = timer.tick.toString();
       });
@@ -124,31 +117,49 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
     final List<Player> fullPlayerList =
         widget.homeTeam.players + widget.awayTeam.players;
 
-    // fullPlayerList[Random().nextInt(fullPlayerList.length)];
     fullPlayerList.shuffle();
+    Player selectedPlayer = fullPlayerList.first;
     RandomEvent event = RandomEvent.values[Random().nextInt(4)];
-    widget.onEvent(randomGenerator(fullPlayerList.first, event),
-        fullPlayerList.first.isAHomeTeamPlayer);
-    print(
-        '${fullPlayerList.first.playerName}, $event, ${fullPlayerList.first.isAHomeTeamPlayer}');
+    widget.onEvent(randomGenerator(selectedPlayer, event));
   }
 
-  String randomGenerator(Player player, RandomEvent event) {
+  Highlight randomGenerator(Player player, RandomEvent event) {
     switch (event) {
       case RandomEvent.goal:
-        return '${player.playerName} has scored a goal';
+        player.hasScored = true;
+        player.numberOfGoals++;
+        return Highlight(player, '${player.playerName} has scored a goal');
 
       case RandomEvent.ownGoal:
-        return '${player.playerName} has scored an own goal';
+        player.ownGoal = true;
+        player.numberofOwnGoals++;
+        return Highlight(player, '${player.playerName} has scored an own goal');
 
       case RandomEvent.redCard:
-        return '${player.playerName} has been expelled';
+        player.isExpelled = true;
+        return Highlight(player, '${player.playerName} has been expelled');
 
       case RandomEvent.yellowCard:
-        return '${player.playerName} has been cautioned';
-
-      default:
-        return '';
+        player.isCautioned = true;
+        return Highlight(player, '${player.playerName} has been cautioned');
     }
+  }
+
+  List<int> generateHighlightMoments() {
+    timeInterval.clear();
+    // Set the maximum number of 'highlight moments'
+    int numOfElements = Random().nextInt(16);
+
+    while (timeInterval.length < numOfElements) {
+      int randomNumber = Random().nextInt(21);
+      if (!timeInterval.contains(randomNumber)) {
+        // Check if the number is not already in the list
+        timeInterval.add(randomNumber);
+      }
+    }
+
+    timeInterval.sort();
+    print(timeInterval);
+    return timeInterval;
   }
 }

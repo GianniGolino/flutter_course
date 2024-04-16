@@ -23,14 +23,6 @@ class _ScoreBarWidgetState extends State<ScoreBarWidget> {
           '${widget.homeTeamScore} - ${widget.awayTeamScore}',
           style: TextStyle(fontSize: 35, color: _secondaryColor),
         ),
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: const Icon(Icons.pause),
-        // ),
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: const Icon(Icons.stop),
-        // ),
       ],
     );
   }

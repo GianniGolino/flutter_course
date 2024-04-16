@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/live_score/models/highlight.dart';
 import 'package:flutter_animations/live_score/models/player.dart';
-import 'package:flutter_animations/live_score/models/team/team.dart';
 import 'package:flutter_animations/live_score/models/team/team_factory.dart';
 import 'package:flutter_animations/live_score/widgets/highlights_widget.dart';
 import 'package:flutter_animations/live_score/widgets/players_list_widget.dart';
@@ -19,8 +19,8 @@ class _LiveScorePageState extends State<LiveScorePage> {
   final homeTeam = buildHomeTeam();
   final awayTeam = buildAwayTeam();
 
-  final int _homeTeamScore = 0;
-  final int _awayTeamScore = 0;
+  int _homeTeamScore = 0;
+  int _awayTeamScore = 0;
 
   static const double _horizontalPadding = 24;
   static const double _verticalPadding = 20;
@@ -28,8 +28,9 @@ class _LiveScorePageState extends State<LiveScorePage> {
   final Color _primaryColor = const Color.fromARGB(255, 8, 76, 93);
   final Color _secondaryColor = const Color.fromARGB(255, 254, 178, 36);
 
-  String highlight = '';
   bool isAHomePlayer = true;
+  final List<Highlight> _highlightsList = [];
+  //List<Player> highlightsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +57,16 @@ class _LiveScorePageState extends State<LiveScorePage> {
                 child: Column(
                   children: [
                     TeamsAndTimeBarWidget(
+                      onMatchStart: onMatchStart,
                       homeTeam: homeTeam,
                       awayTeam: awayTeam,
-                      onEvent: (p0, p1) {
+                      onEvent: (highlight) {
                         setState(() {
-                          highlight = p0;
-                          isAHomePlayer = p1;
+                          _highlightsList.add(highlight);
+                          print(_highlightsList.last.eventDescription);
+                          updateScore(highlight.player);
                         });
                       },
-                      // onEvent: (p0) {
-                      //   setState(() {
-                      //     highlight = p0;
-                      //     isAHomePlayer = p1
-                      //   });
-                      // },
                     ),
                     const Gap(4),
                     ScoreBarWidget(
@@ -79,9 +76,10 @@ class _LiveScorePageState extends State<LiveScorePage> {
                   ],
                 ),
               ),
-              const Gap(4),
+              const Gap(8),
               HighlightsWidget(
-                  highlight: highlight, isAHomePlayer: isAHomePlayer),
+                highlightList: _highlightsList,
+              ),
               const Gap(32),
               Expanded(
                 child: Row(
@@ -89,6 +87,7 @@ class _LiveScorePageState extends State<LiveScorePage> {
                   children: [
                     Expanded(
                       child: PlayersListWidget(
+                        onStatusChanged: (player) => updateColor(player),
                         homeTeam: homeTeam,
                         awayTeam: awayTeam,
                       ),
@@ -102,5 +101,57 @@ class _LiveScorePageState extends State<LiveScorePage> {
         ),
       ),
     );
+  }
+
+  void updateScore(Player player) {
+    if (player.hasScored) {
+      if (player.isAHomeTeamPlayer) {
+        _homeTeamScore++;
+      } else {
+        _awayTeamScore++;
+      }
+      player.hasScored = false;
+    } else if (player.ownGoal) {
+      if (player.isAHomeTeamPlayer) {
+        _awayTeamScore++;
+      } else {
+        _homeTeamScore++;
+      }
+      player.ownGoal = false;
+    }
+  }
+
+  void onMatchStart() {
+    setState(() {
+      _homeTeamScore = 0;
+      _awayTeamScore = 0;
+      _highlightsList.clear();
+      for (Player player in homeTeam.players) {
+        player.isCautioned = false;
+        player.isExpelled = false;
+        player.hasScored = false;
+        player.ownGoal = false;
+        player.numberOfGoals = 0;
+        player.numberofOwnGoals = 0;
+      }
+      for (Player player in awayTeam.players) {
+        player.isCautioned = false;
+        player.isExpelled = false;
+        player.numberOfGoals = 0;
+        player.numberofOwnGoals = 0;
+        player.hasScored = false;
+        player.ownGoal = false;
+      }
+    });
+  }
+
+  Color updateColor(Player player) {
+    if (player.isExpelled) {
+      return Colors.red;
+    } else if (player.isCautioned) {
+      return Colors.yellow;
+    } else {
+      return Colors.transparent;
+    }
   }
 }
