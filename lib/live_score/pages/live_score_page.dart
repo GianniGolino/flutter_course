@@ -30,7 +30,7 @@ class _LiveScorePageState extends State<LiveScorePage> {
 
   bool isAHomePlayer = true;
   final List<Highlight> _highlightsList = [];
-  //List<Player> highlightsList = [];
+  final List<String> _highlightTimes = [];
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +57,15 @@ class _LiveScorePageState extends State<LiveScorePage> {
                 child: Column(
                   children: [
                     TeamsAndTimeBarWidget(
+                      onHighlightTime: (p0) {
+                        _highlightTimes.add(p0);
+                      },
                       onMatchStart: onMatchStart,
                       homeTeam: homeTeam,
                       awayTeam: awayTeam,
                       onEvent: (highlight) {
                         setState(() {
                           _highlightsList.add(highlight);
-                          print(_highlightsList.last.eventDescription);
                           updateScore(highlight.player);
                         });
                       },
@@ -78,6 +80,7 @@ class _LiveScorePageState extends State<LiveScorePage> {
               ),
               const Gap(8),
               HighlightsWidget(
+                highlightTimes: _highlightTimes,
                 highlightList: _highlightsList,
               ),
               const Gap(32),
@@ -126,6 +129,7 @@ class _LiveScorePageState extends State<LiveScorePage> {
       _homeTeamScore = 0;
       _awayTeamScore = 0;
       _highlightsList.clear();
+      _highlightTimes.clear();
       for (Player player in homeTeam.players) {
         player.isCautioned = false;
         player.isExpelled = false;

@@ -14,6 +14,7 @@ class TeamsAndTimeBarWidget extends StatefulWidget {
     required this.homeTeam,
     required this.awayTeam,
     required this.onEvent,
+    required this.onHighlightTime,
     required this.onMatchStart,
   });
 
@@ -21,6 +22,7 @@ class TeamsAndTimeBarWidget extends StatefulWidget {
   final Team awayTeam;
 
   final void Function(Highlight) onEvent;
+  final void Function(String) onHighlightTime;
   final void Function() onMatchStart;
 
   @override
@@ -100,9 +102,9 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
       setState(() {
         _matchTimer = timer.tick.toString();
       });
-
       if (timeInterval.contains(timer.tick)) {
         randomEvent();
+        widget.onHighlightTime(_matchTimer);
       }
     } else {
       setState(() {
@@ -151,15 +153,13 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
     int numOfElements = Random().nextInt(16);
 
     while (timeInterval.length < numOfElements) {
-      int randomNumber = Random().nextInt(21);
+      int randomNumber = Random().nextInt(91);
       if (!timeInterval.contains(randomNumber)) {
         // Check if the number is not already in the list
         timeInterval.add(randomNumber);
       }
     }
-
     timeInterval.sort();
-    print(timeInterval);
     return timeInterval;
   }
 }

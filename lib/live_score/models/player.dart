@@ -8,7 +8,7 @@ class Player {
   bool ownGoal;
   int numberOfGoals;
   int numberofOwnGoals;
-  List<String> events;
+  //List<String> events;
 
   Player({
     required this.shirtNumber,
@@ -20,6 +20,6 @@ class Player {
     this.ownGoal = false,
     this.numberOfGoals = 0,
     this.numberofOwnGoals = 0,
-    required this.events,
+    //required this.events,
   });
 }
