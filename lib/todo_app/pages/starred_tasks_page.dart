@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/todo_app/models/task_item.dart';
+import 'package:flutter_animations/todo_app/models/task.dart';
 
 class StarredTasksPage extends StatefulWidget {
   const StarredTasksPage({super.key, required this.starredTasks});
 
-  final List<TaskItem> starredTasks;
+  final List<Task> starredTasks;
 
   @override
   State<StarredTasksPage> createState() => _StarredTasksPageState();

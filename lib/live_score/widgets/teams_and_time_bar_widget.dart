@@ -31,7 +31,7 @@ class TeamsAndTimeBarWidget extends StatefulWidget {
 
 class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
   Timer? _timer;
-  Duration duration = const Duration(seconds: 1);
+  final Duration _duration = const Duration(seconds: 1);
   String _matchTimer = "0";
   final List<int> timeInterval = [];
 
@@ -92,13 +92,13 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
   }
 
   void startTimer() {
-    _timer ??= Timer.periodic(duration, (internalTimer) {
+    _timer ??= Timer.periodic(_duration, (internalTimer) {
       handleMatchTimer(internalTimer);
     });
   }
 
   void handleMatchTimer(Timer timer) {
-    if (timer.tick < 21) {
+    if (timer.tick < 91) {
       setState(() {
         _matchTimer = timer.tick.toString();
       });

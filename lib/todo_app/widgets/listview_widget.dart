@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/todo_app/models/task_item.dart';
+import 'package:flutter_animations/todo_app/models/task.dart';
 
 class ListViewWidget extends StatefulWidget {
-  const ListViewWidget(
-      {super.key,
-      required this.tasks,
-      required this.starredTasks,
-      required this.editTextController});
+  const ListViewWidget({
+    super.key,
+    required this.tasks,
+    required this.starredTasks,
+    required this.editTextController,
+    required this.onTaskDeleted,
+    required this.onTaskStarred,
+  });
 
   final TextEditingController editTextController;
-  final List<TaskItem> tasks;
-  final List<TaskItem> starredTasks;
+  final List<Task> tasks;
+  final List<Task> starredTasks;
+  final void Function() onTaskDeleted;
+  final void Function() onTaskStarred;
 
   @override
   State<ListViewWidget> createState() => _ListViewWidgetState();
@@ -31,15 +36,6 @@ class _ListViewWidgetState extends State<ListViewWidget> {
       itemBuilder: (context, index) {
         return Row(
           children: [
-            // Expanded(
-            //   flex: 1,
-            //   child: Text(
-            //     widget.tasks[index].id.toString(),
-            //   ),
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 4),
-            // ),
             Expanded(
               flex: 5,
               child: !widget.tasks[index].isEditing
@@ -68,6 +64,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
                           starredTask.id == widget.tasks[index].id);
                     }
                     widget.tasks.removeAt(index);
+                    widget.onTaskDeleted();
                   });
                 },
                 icon: const Icon(Icons.delete),
@@ -84,6 +81,8 @@ class _ListViewWidgetState extends State<ListViewWidget> {
                         : widget.starredTasks.add(widget.tasks[index]);
                     widget.tasks[index].isStarred =
                         !widget.tasks[index].isStarred;
+
+                    widget.onTaskStarred();
                   });
                 },
                 icon: Icon(Icons.star,
