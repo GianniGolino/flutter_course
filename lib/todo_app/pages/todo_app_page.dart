@@ -106,10 +106,6 @@ class _ToDoAppPageState extends State<ToDoAppPage> {
                 });
               },
               textController: textController),
-          // TaskInputRowWidget(
-          //     tasks: tasks,
-          //     tasksIDIndex: tasksIDIndex,
-          //     textController: textController),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
           ),
@@ -154,24 +150,6 @@ class _ToDoAppPageState extends State<ToDoAppPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('tasks', jsonEncode(tasks));
   }
-
-  //   void loadTasks() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final List<String>? taskList = prefs.getStringList('tasks');
-  //   if (taskList != null) {
-  //     setState(() {
-  //       tasks.clear();
-  //       tasks.addAll(taskList.map((taskString) => Task.fromJson(taskString)));
-  //     });
-  //   }
-  // }
-
-  // void saveTasks() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final List<String> taskStrings =
-  //       tasks.map((task) => task.toJson()).toList();
-  //   await prefs.setStringList('tasks', taskStrings);
-  // }
 
   List<Task> getStarredTasks() {
     return tasks.where((task) => task.isStarred).toList();

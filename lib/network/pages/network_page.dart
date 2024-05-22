@@ -80,12 +80,6 @@ class NetworkPage extends StatelessWidget {
                       ],
                     )
                   : const Center(child: CircularProgressIndicator());
-              // return data.hasData
-              //     ? Center(
-              //         //child: Text(data.data ?? ''),
-              //         child: Text(data.data!.id.toString()),
-              //       )
-              //     : const Text('there is no data');
             }),
       ),
     );

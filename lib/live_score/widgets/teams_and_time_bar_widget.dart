@@ -119,8 +119,11 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
     final List<Player> fullPlayerList =
         widget.homeTeam.players + widget.awayTeam.players;
 
-    fullPlayerList.shuffle();
-    Player selectedPlayer = fullPlayerList.first;
+    List<Player> activePlayers =
+        fullPlayerList.where((player) => player.isPlaying == true).toList();
+
+    activePlayers.shuffle();
+    Player selectedPlayer = activePlayers.first;
     RandomEvent event = RandomEvent.values[Random().nextInt(4)];
     widget.onEvent(randomGenerator(selectedPlayer, event));
   }
@@ -139,11 +142,19 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
 
       case RandomEvent.redCard:
         player.isExpelled = true;
+        player.isPlaying = false;
         return Highlight(player, '${player.playerName} has been expelled');
 
       case RandomEvent.yellowCard:
-        player.isCautioned = true;
-        return Highlight(player, '${player.playerName} has been cautioned');
+        if (player.isCautioned == false) {
+          player.isCautioned = true;
+          return Highlight(player, '${player.playerName} has been cautioned');
+        } else {
+          player.isExpelled = true;
+          player.isPlaying = false;
+          return Highlight(player,
+              '${player.playerName} has been expelled after receiving a second yellow card');
+        }
     }
   }
 
@@ -161,5 +172,11 @@ class _TeamsAndTimeBarWidgetState extends State<TeamsAndTimeBarWidget> {
     }
     timeInterval.sort();
     return timeInterval;
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Annulla il timer se è attivo per evitare memory leak
+    super.dispose();
   }
 }

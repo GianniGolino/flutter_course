@@ -17,6 +17,11 @@ class _NewPostPageState extends State<NewPostPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
   final TextEditingController userIdController = TextEditingController();
+
+  String _titleHintText = 'Post title';
+  String _bodyHintText = 'Post body';
+  String _userIdHintText = 'User id';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +35,17 @@ class _NewPostPageState extends State<NewPostPage> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: TextField(
                 controller: titleController,
-                decoration: const InputDecoration(
-                    hintStyle: TextStyle(color: Colors.grey),
-                    hintText: 'Post title',
-                    border: OutlineInputBorder(
+                decoration: InputDecoration(
+                    label: const Text('Post title'),
+                    hintText: _titleHintText,
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15)))),
+                onTap: () {
+                  setState(() {
+                    _titleHintText = '';
+                  });
+                },
               ),
             ),
             const Gap(8),
@@ -44,26 +55,38 @@ class _NewPostPageState extends State<NewPostPage> {
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
               child: TextField(
                 controller: bodyController,
-                decoration: const InputDecoration(
-                    hintText: 'Post body',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(
+                decoration: InputDecoration(
+                    label: const Text('Post body'),
+                    hintText: _bodyHintText,
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15)))),
+                onTap: () {
+                  setState(() {
+                    _bodyHintText = '';
+                  });
+                },
               ),
             ),
             const Gap(8),
 
             //post userId textField
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
               child: TextField(
-                controller: userIdController,
+                controller: bodyController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                    hintText: 'User Id',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(
+                decoration: InputDecoration(
+                    label: const Text('User id'),
+                    hintText: _userIdHintText,
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15)))),
+                onTap: () {
+                  setState(() {
+                    _userIdHintText = '';
+                  });
+                },
               ),
             ),
             const Gap(16),
@@ -93,7 +116,6 @@ class _NewPostPageState extends State<NewPostPage> {
         body: bodyController.text,
         title: titleController.text,
         userId: int.parse(userIdController.text));
-    //TODO chiedi a Gigi - json non è utilizzato idem response se non effettuiamo il print
     String json = newPost.toJson();
     Uri url = Uri.https('jsonplaceholder.typicode.com', 'posts');
 

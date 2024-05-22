@@ -3,6 +3,7 @@ import 'package:flutter_animations/animation/models/animation.dart';
 import 'package:flutter_animations/animation/pages/animation_examples_page.dart';
 import 'package:flutter_animations/live_score/pages/live_score_page.dart';
 import 'package:flutter_animations/network/pages/network_page.dart';
+import 'package:flutter_animations/state_management/pages/provider_first_page.dart';
 import 'package:gap/gap.dart';
 
 class ButtonColumnWidget extends StatelessWidget {
@@ -84,6 +85,17 @@ class ButtonColumnWidget extends StatelessWidget {
                 ));
               },
               child: const Text('Chiamate Di Rete'),
+            ),
+          ),
+          const Gap(16),
+          SizedBox(
+            width: 250,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => const ProviderFirstPage()));
+              },
+              child: const Text('State Management'),
             ),
           ),
         ],

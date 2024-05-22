@@ -57,8 +57,8 @@ class _LiveScorePageState extends State<LiveScorePage> {
                 child: Column(
                   children: [
                     TeamsAndTimeBarWidget(
-                      onHighlightTime: (p0) {
-                        _highlightTimes.add(p0);
+                      onHighlightTime: (highlightTime) {
+                        _highlightTimes.add(highlightTime);
                       },
                       onMatchStart: onMatchStart,
                       homeTeam: homeTeam,
@@ -137,6 +137,7 @@ class _LiveScorePageState extends State<LiveScorePage> {
         player.ownGoal = false;
         player.numberOfGoals = 0;
         player.numberofOwnGoals = 0;
+        player.isPlaying = true;
       }
       for (Player player in awayTeam.players) {
         player.isCautioned = false;
@@ -145,6 +146,7 @@ class _LiveScorePageState extends State<LiveScorePage> {
         player.numberofOwnGoals = 0;
         player.hasScored = false;
         player.ownGoal = false;
+        player.isPlaying = true;
       }
     });
   }

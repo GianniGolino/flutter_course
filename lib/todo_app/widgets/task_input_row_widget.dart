@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_animations/model/task_item.dart';
 
 class TaskInputRowWidget extends StatefulWidget {
   const TaskInputRowWidget(
-      {super.key,
-      // required this.tasks,
-      // required this.tasksIDIndex,
-      required this.onTaskAdded,
-      required this.textController});
+      {super.key, required this.onTaskAdded, required this.textController});
 
-  //final List<TaskItem> tasks;
-  //final int tasksIDIndex;
   final void Function(String) onTaskAdded;
   final TextEditingController textController;
 
@@ -19,7 +12,11 @@ class TaskInputRowWidget extends StatefulWidget {
 }
 
 class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
-  //int _localTasksIDIndex = 0;
+  @override
+  void dispose() {
+    widget.textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +30,10 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
             height: 44,
             child: TextField(
               controller: widget.textController,
-              //adding tasks through the keyboard
               onSubmitted: (value) {
                 if (value.isNotEmpty) {
                   widget.onTaskAdded(value);
-                  // widget.tasks.add(TaskItem(widget.textController.text, false,
-                  //     _localTasksIDIndex, false));
-                  // _localTasksIDIndex++;
                   widget.textController.clear();
-                  // widget.textController.text = "";
                 }
               },
               textInputAction: TextInputAction.done,
@@ -60,7 +52,7 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
             width: 88,
             child: ElevatedButton(
               style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ))),
               onPressed: () {
@@ -68,19 +60,6 @@ class _TaskInputRowWidgetState extends State<TaskInputRowWidget> {
                   widget.onTaskAdded(widget.textController.text);
                   widget.textController.clear();
                 }
-
-                // setState(() {
-                //   if (widget.textController.text.isNotEmpty) {
-                //     widget.tasks.add(TaskItem(widget.textController.text, false,
-                //         _localTasksIDIndex, false));
-                //     _localTasksIDIndex++;
-                //     //isStarred.add(false);
-                //     widget.textController.clear();
-                //     widget.textController.text = "";
-
-                //     FocusScope.of(context).unfocus();
-                //   }
-                // });
               },
               child: const Icon(Icons.play_arrow),
             ),

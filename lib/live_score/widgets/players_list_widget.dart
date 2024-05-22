@@ -40,8 +40,11 @@ class _PlayersListWidgetState extends State<PlayersListWidget> {
                           child: Text(
                             widget.homeTeam.players[index].shirtNumber
                                 .toString(),
-                            style:
-                                TextStyle(fontSize: 18, color: _secondaryColor),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: widget.homeTeam.players[index].isPlaying
+                                    ? _secondaryColor
+                                    : _secondaryColor.withOpacity(0.6)),
                           ),
                         ),
                         const Gap(8),
@@ -49,8 +52,11 @@ class _PlayersListWidgetState extends State<PlayersListWidget> {
                         Text(
                           textAlign: TextAlign.left,
                           widget.homeTeam.players[index].playerName,
-                          style:
-                              TextStyle(fontSize: 18, color: _secondaryColor),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: widget.homeTeam.players[index].isPlaying
+                                  ? _secondaryColor
+                                  : _secondaryColor.withOpacity(0.6)),
                         ),
                         const Gap(8),
                         //card container
@@ -109,7 +115,11 @@ class _PlayersListWidgetState extends State<PlayersListWidget> {
                       //playerName
                       Text(
                         widget.awayTeam.players[index].playerName,
-                        style: TextStyle(fontSize: 18, color: _secondaryColor),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: widget.awayTeam.players[index].isPlaying
+                                ? _secondaryColor
+                                : _secondaryColor.withOpacity(0.6)),
                         //textAlign: TextAlign.end,
                       ),
                       const Gap(8),
@@ -119,8 +129,11 @@ class _PlayersListWidgetState extends State<PlayersListWidget> {
                         child: Text(
                           textAlign: TextAlign.end,
                           widget.awayTeam.players[index].shirtNumber.toString(),
-                          style:
-                              TextStyle(fontSize: 18, color: _secondaryColor),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: widget.awayTeam.players[index].isPlaying
+                                  ? _secondaryColor
+                                  : _secondaryColor.withOpacity(0.6)),
                           //textAlign: TextAlign.end,
                         ),
                       ),
